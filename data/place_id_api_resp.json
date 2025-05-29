@@ -1,0 +1,410 @@
+{
+      "dal": {
+          "getSunV3LocationSearchUrlConfig": {
+              "language:en-US;locationType:locale;query:london": {
+                  "loading": false,
+                  "loaded": true,
+                  "data": {
+                      "location": {
+                          "address": [
+                              "London, Greater London, England, United Kingdom",
+                              "London, Ontario, Canada",
+                              "London Borough of Enfield, Greater London, England, United Kingdom",
+                              "Londonderry, Derry City and Strabane, Northern Ireland, United Kingdom",
+                              "London Gatwick Airport, West Sussex, England, United Kingdom",
+                              "London Borough of Barnet, Greater London, England, United Kingdom",
+                              "London, Kentucky, United States",
+                              "London Bridge, Southwark, London, Greater London, England, United Kingdom",
+                              "London, Ohio, United States",
+                              "Londonderry, New Hampshire, United States"
+                          ],
+                          "adminDistrict": [
+                              "England",
+                              "Ontario",
+                              "England",
+                              "Northern Ireland",
+                              "England",
+                              "England",
+                              "Kentucky",
+                              "England",
+                              "Ohio",
+                              "New Hampshire"
+                          ],
+                          "adminDistrictCode": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              "KY",
+                              null,
+                              "OH",
+                              "NH"
+                          ],
+                          "city": [
+                              "London",
+                              "London",
+                              "London Borough of Enfield",
+                              "Londonderry",
+                              "London Gatwick Airport",
+                              "London Borough of Barnet",
+                              "London",
+                              "London",
+                              "London",
+                              "Londonderry"
+                          ],
+                          "country": [
+                              "United Kingdom",
+                              "Canada",
+                              "United Kingdom",
+                              "United Kingdom",
+                              "United Kingdom",
+                              "United Kingdom",
+                              "United States",
+                              "United Kingdom",
+                              "United States",
+                              "United States"
+                          ],
+                          "countryCode": [
+                              "GB",
+                              "CA",
+                              "GB",
+                              "GB",
+                              "GB",
+                              "GB",
+                              "US",
+                              "GB",
+                              "US",
+                              "US"
+                          ],
+                          "displayName": [
+                              "London",
+                              "London",
+                              "London Borough of Enfield",
+                              "Londonderry",
+                              "London Gatwick Airport",
+                              "London Borough of Barnet",
+                              "London",
+                              "London Bridge",
+                              "London",
+                              "Londonderry"
+                          ],
+                          "displayContext": [
+                              "England, United Kingdom",
+                              "Ontario, Canada",
+                              "England, United Kingdom",
+                              "Northern Ireland, United Kingdom",
+                              "England, United Kingdom",
+                              "England, United Kingdom",
+                              "Kentucky, United States",
+                              "Southwark, London, United Kingdom",
+                              "Ohio, United States",
+                              "New Hampshire, United States"
+                          ],
+                          "ianaTimeZone": [
+                              "Europe/London",
+                              "America/Toronto",
+                              "Europe/London",
+                              "Europe/London",
+                              "Europe/London",
+                              "Europe/London",
+                              "America/New_York",
+                              "Europe/London",
+                              "America/New_York",
+                              "America/New_York"
+                          ],
+                          "latitude": [
+                              51.507,
+                              42.985,
+                              51.652,
+                              54.997,
+                              51.156,
+                              51.655,
+                              37.128,
+                              51.506,
+                              39.886,
+                              42.865
+                          ],
+                          "locale": [
+                              {
+                                  "locale1": "Greater London",
+                                  "locale2": "London",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Middlesex County",
+                                  "locale2": "London",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Greater London",
+                                  "locale2": "London Borough of Enfield",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Derry City and Strabane",
+                                  "locale2": "Londonderry",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "West Sussex",
+                                  "locale2": "London Gatwick Airport",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Greater London",
+                                  "locale2": "London Borough of Barnet",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Laurel County",
+                                  "locale2": "London",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Greater London",
+                                  "locale2": "London",
+                                  "locale3": "Southwark",
+                                  "locale4": "London Bridge"
+                              },
+                              {
+                                  "locale1": "Madison County",
+                                  "locale2": "London",
+                                  "locale3": null,
+                                  "locale4": null
+                              },
+                              {
+                                  "locale1": "Rockingham County",
+                                  "locale2": "Londonderry",
+                                  "locale3": null,
+                                  "locale4": null
+                              }
+                          ],
+                          "longitude": [
+                              -0.128,
+                              -81.25,
+                              -0.081,
+                              -7.322,
+                              -0.163,
+                              -0.202,
+                              -84.083,
+                              -0.086,
+                              -83.449,
+                              -71.374
+                          ],
+                          "neighborhood": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              "London Bridge",
+                              null,
+                              null
+                          ],
+                          "placeId": [
+                              "0b8697c01baca04214b4abd206319d3eba60db5fb05c191012c4e02f6bdb23a4",
+                              "b5746e3241fe4d72edc8d38783c6c7ec3e8f4c3901a24424d25ef85604520069",
+                              "ad7745a3822908feef2ef0fe38e77ea555bc968d09a35618f80aeb968cf2e239",
+                              "4e999dcb0b8f886154fbe611d30bf5012e4eb45b258d89b767c6d26af8a85679",
+                              "6ac8d74e2e26c032835d0ba3cbbaf9cbf8d16351a38d119fdfe7f7cadbbcdf03",
+                              "81ad19c5b6a10e41925b0edf237b07497605118d7360c0988cde710f0c1f8664",
+                              "c60bb8bdd5f05724abe4700623fbde1b92439ddd809d754b1e8bd728f85e859b",
+                              "7a6c6c8963acb7b8ab202b0a916832b2a9043bb3137d2756012d67bc25662aae",
+                              "7fcd37c58b1d2e24045f2f1a93459725c850a2f7ab45531df685630d7520e242",
+                              "0aba593a1a3f79567927ea69cf501f0355818a98f64eabadf51f94167ec7fb8a"
+                          ],
+                          "postalCode": [
+                              "SW1A 2",
+                              "N6A",
+                              "EN2 6",
+                              "BT48 6",
+                              "RH6 0",
+                              "EN5 5",
+                              "40742",
+                              "SE1 2",
+                              "43140",
+                              "03053"
+                          ],
+                          "postalKey": [
+                              "SW1A 2:GB",
+                              "N6A:CA",
+                              "EN2 6:GB",
+                              "BT48 6:GB",
+                              "RH6 0:GB",
+                              "EN5 5:GB",
+                              "40742:US",
+                              "SE1 2:GB",
+                              "43140:US",
+                              "03053:US"
+                          ],
+                          "disputedArea": [
+                              false,
+                              false,
+                              false,
+                              false,
+                              false,
+                              false,
+                              false,
+                              false,
+                              false,
+                              false
+                          ],
+                          "disputedCountries": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null
+                          ],
+                          "disputedCountryCodes": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null
+                          ],
+                          "disputedCustomers": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null
+                          ],
+                          "disputedShowCountry": [
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ],
+                              [
+                                  false
+                              ]
+                          ],
+                          "iataCode": [
+                              "LCY",
+                              "YXU",
+                              "LCY",
+                              "LDY",
+                              "LGW",
+                              "LTN",
+                              "LEX",
+                              "LCY",
+                              "LCK",
+                              "MHT"
+                          ],
+                          "icaoCode": [
+                              "EGLC",
+                              "CYXU",
+                              "EGLC",
+                              "EGAE",
+                              "EGKK",
+                              "EGGW",
+                              "KLEX",
+                              "EGLC",
+                              "KLCK",
+                              "KMHT"
+                          ],
+                          "locId": [
+                              "UKXX0085:1:UK",
+                              "16340:25:CA",
+                              "UKXX1561:1:UK",
+                              "gcfbchvw:10:UK",
+                              "27023:25:UK",
+                              "UKXX3703:1:UK",
+                              "USKY1090:1:US",
+                              "EC3R:4:UK",
+                              "43140:4:US",
+                              "03053:4:US"
+                          ],
+                          "locationCategory": [
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null,
+                              null
+                          ],
+                          "pwsId": [
+                              "ILONDO440",
+                              "ILONDO494",
+                              "ILONDO471",
+                              "ILONDO275",
+                              "IHORLE9",
+                              "IBARNET11",
+                              "KKYLONDO23",
+                              "ILONDON450",
+                              "KOHLONDO39",
+                              "KNHLONDO80"
+                          ],
+                          "type": [
+                              "city",
+                              "city",
+                              "city",
+                              "city",
+                              "city",
+                              "city",
+                              "city",
+                              "neighborhood",
+                              "city",
+                              "city"
+                          ]
+                      }
+                  },
+                  "status": 200,
+                  "statusText": "OK"
+              }
+          }
+      }
+  }
