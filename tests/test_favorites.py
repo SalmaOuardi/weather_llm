@@ -4,16 +4,12 @@ import json
 def test_favorites_flow(client):
     # Signup & login
     client.post("/signup", json={"username": "kevin", "password": "notweird"})
-    login = client.post(
-        "/login", data={"username": "kevin", "password": "notweird"}
-    )
+    login = client.post("/login", data={"username": "kevin", "password": "notweird"})
     token = login.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
     # Add to favorites
-    resp = client.post(
-        "/favorites", headers=headers, json={"cities": ["Paris"]}
-    )
+    resp = client.post("/favorites", headers=headers, json={"cities": ["Paris"]})
     assert resp.status_code == 200
     assert any(city.lower() == "paris" for city in resp.json()["favorites"])
 

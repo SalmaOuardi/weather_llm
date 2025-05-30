@@ -1,9 +1,7 @@
 def test_weather_search(client):
     # Sign up & login first
     client.post("/signup", json={"username": "jim", "password": "pam4ever"})
-    login = client.post(
-        "/login", data={"username": "jim", "password": "pam4ever"}
-    )
+    login = client.post("/login", data={"username": "jim", "password": "pam4ever"})
     token = login.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 

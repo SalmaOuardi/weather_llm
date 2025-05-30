@@ -2,9 +2,7 @@ import streamlit as st
 import requests
 
 API_URL = "http://localhost:8000"
-st.set_page_config(
-    page_title="Guided Weather", page_icon="🌤️", layout="centered"
-)
+st.set_page_config(page_title="Guided Weather", page_icon="🌤️", layout="centered")
 
 
 def small_text(s, color="#888"):
@@ -45,9 +43,7 @@ if st.session_state.token is None:
 
     with tab_signup:
         new_user = st.text_input("choose a username", key="new_user")
-        new_pwd = st.text_input(
-            "choose a password", type="password", key="new_pwd"
-        )
+        new_pwd = st.text_input("choose a password", type="password", key="new_pwd")
         if st.button("create account", use_container_width=True):
             with st.spinner("signing up..."):
                 resp = requests.post(

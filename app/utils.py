@@ -44,13 +44,8 @@ CACHE_MINUTES = 15
 def get_cached_weather(city):
     now = datetime.datetime.now()
     with SessionLocal() as db:
-        record = (
-            db.query(WeatherCache).filter(WeatherCache.city == city).first()
-        )
-        if (
-            record
-            and (now - record.fetched_at).total_seconds() < CACHE_MINUTES * 60
-        ):
+        record = db.query(WeatherCache).filter(WeatherCache.city == city).first()
+        if record and (now - record.fetched_at).total_seconds() < CACHE_MINUTES * 60:
             return {
                 "city": city,
                 "temperature": record.temperature,
@@ -62,9 +57,7 @@ def get_cached_weather(city):
 def set_cached_weather(city, temperature, condition):
     now = datetime.datetime.now()
     with SessionLocal() as db:
-        cache = (
-            db.query(WeatherCache).filter(WeatherCache.city == city).first()
-        )
+        cache = db.query(WeatherCache).filter(WeatherCache.city == city).first()
         if cache:
             cache.temperature = temperature
             cache.condition = condition
