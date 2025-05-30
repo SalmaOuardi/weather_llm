@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from app.utils import parse_city_country
 
+
 def get_city_place_id(user_input):
     """
     Given a user input string, parse out city and country, query weather.com's internal API,
@@ -12,11 +13,7 @@ def get_city_place_id(user_input):
     payload = [
         {
             "name": "getSunV3LocationSearchUrlConfig",
-            "params": {
-                "language": "en-US",
-                "locationType": "locale",
-                "query": city
-            }
+            "params": {"language": "en-US", "locationType": "locale", "query": city},
         }
     ]
     headers = {
@@ -26,7 +23,7 @@ def get_city_place_id(user_input):
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
         ),
-        "Referer": "https://weather.com"
+        "Referer": "https://weather.com",
     }
 
     try:
@@ -43,9 +40,13 @@ def get_city_place_id(user_input):
             for city_name, cc, place_id in zip(
                 locations["city"], locations["countryCode"], locations["placeId"]
             ):
-                if city_name and cc == country_code and city_name.strip().lower() == user_city:
+                if (
+                    city_name
+                    and cc == country_code
+                    and city_name.strip().lower() == user_city
+                ):
                     return place_id, city_name
-              
+
             # 2. Fallback: first city in correct country
             for city_name, cc, place_id in zip(
                 locations["city"], locations["countryCode"], locations["placeId"]
@@ -69,6 +70,7 @@ def get_city_place_id(user_input):
         print(f"Network or request error: {e}")
         return None, None
 
+
 def fetch_html_page(place_id):
     """
     Fetches the weather.com page HTML for a given place_id.
@@ -80,7 +82,7 @@ def fetch_html_page(place_id):
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
             "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
         ),
-        "Referer": "https://weather.com"
+        "Referer": "https://weather.com",
     }
     try:
         resp = requests.get(endpoint, headers=headers, timeout=10)
@@ -90,6 +92,7 @@ def fetch_html_page(place_id):
         print(f"Failed to fetch weather page for {place_id}: {e}")
         return None
 
+
 def parse_weather_from_html(html_text, city):
     """
     Given HTML text of a city's weather.com page, extract temperature (Celsius) and weather condition.
@@ -97,27 +100,29 @@ def parse_weather_from_html(html_text, city):
     soup = BeautifulSoup(html_text, "html.parser")
 
     # get temperature (default on site is F°, so convert to C°)
-    temp_span = soup.find('span', {'data-testid': 'TemperatureValue'})
+    temp_span = soup.find("span", {"data-testid": "TemperatureValue"})
     if temp_span:
         temp_text = temp_span.get_text(strip=True)
-        temp_digits = ''.join(filter(str.isdigit, temp_text))
+        temp_digits = "".join(filter(str.isdigit, temp_text))
         temperature = round((int(temp_digits) - 32) * 5 / 9) if temp_digits else None
     else:
         temperature = None
 
     # get weather condition
-    condition_div = soup.find('div', {'data-testid': 'wxPhrase'})
-    weather_condition = condition_div.get_text(strip=True).lower() if condition_div else None
+    condition_div = soup.find("div", {"data-testid": "wxPhrase"})
+    weather_condition = (
+        condition_div.get_text(strip=True).lower() if condition_div else None
+    )
 
     return {
         "city": city,
         "temperature": temperature,
-        "weather_condition": weather_condition
+        "weather_condition": weather_condition,
     }
 
 
 if __name__ == "__main__":
-    user_input = "glasgow"      
+    user_input = "glasgow"
     place_id, matched_city = get_city_place_id(user_input)
     if place_id and matched_city:
         html = fetch_html_page(place_id)

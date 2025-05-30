@@ -1,4 +1,5 @@
-import json 
+import json
+
 
 def test_favorites_flow(client):
     # Signup & login
@@ -22,7 +23,7 @@ def test_favorites_flow(client):
         "DELETE",
         "/favorites",
         headers={**headers, "Content-Type": "application/json"},
-        data=json.dumps({"city": "Paris"})
+        data=json.dumps({"city": "Paris"}),
     )
     assert resp3.status_code == 200
     assert all(city.lower() != "paris" for city in resp3.json()["favorites"])
