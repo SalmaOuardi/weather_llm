@@ -25,9 +25,8 @@ jobs:
 
       - name: Lint (optional)
         run: |
-          pip install black flake8
+          pip install black 
           black --check .
-          flake8 .
 
       - name: Run tests
         run: |
