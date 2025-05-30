@@ -1,132 +1,129 @@
 
 # Guided Weather ☀️
 
-A minimalist, fullstack weather app demo, showcasing:
-
-- Live web scraping from [weather.com](https://weather.com/)
-- User authentication (JWT/FastAPI)
-- SQLite persistence for users, favorites, and weather caching
-- Favorites dashboard with LLM-powered summaries and Q&A
-- Local LLM integration (Ollama) for natural language interaction
-- Minimal, UX-focused Streamlit frontend
+A minimalist weather dashboard and favorites tracker with **live scraping, weather caching, authentication, and LLM-powered summaries** — built with FastAPI, Streamlit, SQLite, and Ollama.
 
 ---
 
-## ✨ Features
+## Features
 
-- **Search live weather** for any city worldwide (robust place matching & country code parsing)
-- **Sign up / log in** with JWT-secured API
-- **Save and manage favorite cities** (persistent per-user)
-- **Weather caching** for efficiency and API-friendliness
-- **Natural language weather summary** (`/summary`) via Llama 3 or Mistral 7B (Ollama)
-- **Ask anything** about your favorites — e.g., *“Which cities are sunny?”* — with structured JSON answers from an LLM
-- **Simple, modern UI** with Streamlit (mobile-friendly, small text, compact, dark/light aware)
+- **🔒 User Signup & Login** — Secure JWT-based authentication (passwords hashed).
+- **🌍 Live Weather Search** — Scrapes up-to-date weather for any city via weather.com.
+- **⭐ Favorites** — Save, view, and remove your favorite cities (persisted in SQLite).
+- **⚡ Weather Caching** — Avoids excessive scraping (configurable TTL, default 15min).
+- **🤖 LLM Summaries & Q&A** — Summarize or query your weather using local Ollama models (no OpenAI API required!).
+- **🧪 Full Test Suite** — Pytest for backend, with robust coverage for endpoints and logic.
+- **🚦 CI/CD** — Automated with GitHub Actions (linting, formatting, tests).
+- **🐳 Dockerized** — Easily run backend, UI, and Ollama via `docker-compose`.
 
 ---
 
-## 🏗️ Project Structure
+## Directory Structure
 
 ```
-app/
-  ├── auth.py        # Auth logic (signup, login, JWT)
-  ├── country_map.py # Maps country names to ISO codes
-  ├── db.py          # SQLAlchemy ORM: users, favorites, weather cache
-  ├── llm.py         # Ollama LLM client (for /summary and /ask endpoints)
-  ├── main.py        # FastAPI app, all endpoints
-  ├── scraper.py     # Scraping/parsing logic for weather.com
-  ├── utils.py       # City/country parsing, caching helpers
-data/
-  └── (optional: static data, etc.)
-tests/
-  └── (add test scripts here)
-ui.py                # Streamlit UI for all features
-weather.db           # SQLite database
-requirements.txt     # All Python dependencies
-.env                 # (optional) secrets/keys for prod use
+.
+├── app/                  # FastAPI backend & core logic
+│   ├── auth.py           # Auth/JWT logic
+│   ├── country_map.py    # Country name/code mapping
+│   ├── db.py             # SQLAlchemy models & DB helpers
+│   ├── llm.py            # Ollama LLM integration
+│   ├── main.py           # FastAPI app & endpoints
+│   ├── scraper.py        # Weather scraping logic
+│   ├── utils.py          # City parsing, weather cache, helpers
+│   └── data/             # (optional) Static or mock data
+│
+├── tests/                # All backend tests (pytest)
+│   ├── conftest.py
+│   ├── test_auth.py
+│   ├── test_favorites.py
+│   ├── test_main.py
+│   └── test_weather.py
+│
+├── ui.py                 # Streamlit frontend (minimalist weather UI)
+├── weather.db            # SQLite DB (auto-created)
+├── requirements.txt      # Python dependencies
+├── Dockerfile            # Backend image
+├── Dockerfile.ui         # UI image
+├── docker-compose.yml    # One command to run all services
+├── README.md
+└── .github/workflows/ci.yml  # CI pipeline
 ```
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
-### 1. **Clone & Install**
-```bash
-git clone https://github.com/yourusername/guided-weather.git
-cd guided-weather
-pip install -r requirements.txt
-```
+1. **Clone & Install**
+    ```bash
+    git clone https://github.com/yourusername/weather_llm.git
+    cd weather_llm
+    pip install -r requirements.txt
+    ```
 
-### 2. **Start Ollama (LLM API)**
-> For best results, use `llama3` (8B) or `Mistral` (7B)  
-```bash
-ollama pull llama3
-ollama run llama3
-# or for lighter model:
-# ollama pull phi3
-# ollama run phi3
-```
+2. **Run Backend**
+    ```bash
+    uvicorn app.main:app --reload
+    ```
 
-### 3. **Run Backend API (FastAPI)**
-```bash
-uvicorn app.main:app --reload
-```
-- API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+3. **Run Streamlit UI**
+    ```bash
+    streamlit run ui.py
+    ```
 
-### 4. **Launch Frontend UI**
-```bash
-streamlit run ui.py
-```
-- App: [http://localhost:8501](http://localhost:8501)
+4. **Run Ollama (for LLM features)**
+    ```bash
+    ollama run mistral   # or phi3, llama3, etc.
+    ```
+
+5. **All in Docker (recommended)**
+    ```bash
+    docker-compose up --build
+    ```
 
 ---
 
-## 💡 How It Works
+## Testing
 
-- **Scraping:** For each city, backend scrapes [weather.com](https://weather.com/) using their internal search API to resolve city/place IDs, then fetches live weather HTML and parses it.
-- **Authentication:** Simple JWT token flow; all main endpoints require login.
-- **Persistence:** Users, favorites, and weather cache stored in SQLite via SQLAlchemy ORM.
-- **LLM Integration:** `/summary` and `/ask` endpoints pass weather context to a local LLM (Ollama) for natural language output, including structured JSON for Q&A.
-- **Frontend:** Streamlit app connects to all endpoints, handles login, city search, favorites, summaries, and Q&A.
-
----
-
-## 🤖 Tech Stack
-
-- **Backend:** Python, FastAPI, SQLAlchemy, SQLite
-- **LLM:** Ollama (`llama3` or `phi3` models)
-- **Frontend:** Streamlit
-- **Other:** BeautifulSoup, requests
+- Run all tests:
+    ```bash
+    pytest
+    ```
+- Lint & format:
+    ```bash
+    black . && flake8 .
+    ```
 
 ---
 
-## 📝 Example API Usage
+## Usage
 
-- **Weather search:** `GET /weather?city=London`
-- **Add favorite:** `POST /favorites` with `{"cities": ["London"]}`
-- **Get favorites:** `GET /favorites`
-- **Summary (LLM):** `GET /summary`
-- **Ask:** `POST /ask` with `{"question": "Which cities are sunny now?"}`
-
----
-
-## 🧩 Scaling & Extensibility
-
-- **Pluggable LLM backend:** swap Ollama for OpenAI/Mistral easily
-- **Autocomplete-ready:** design can easily support suggestions/autocomplete for city/country (see scraper logic)
-- **Scalable weather cache:** efficient for 100k+ cities with minor tweaks (indexing, async, etc.)
+- **Signup/Login:** Use the UI to create an account.
+- **Search Weather:** Type any city and get live weather.
+- **Favorites:** Add/remove cities and view their weather.
+- **Summaries/Q&A:** Get LLM-powered natural language summaries or ask questions about your cities.
 
 ---
 
-## 📚 License
+## LLM Integration
 
-MIT (see LICENSE)
-
----
-
-## 🙋‍♀️ Author
-
-Built by [Salma OUARDI](https://github.com/SalmaOuardi)
+- Uses Ollama (local, privacy-safe) for summaries and Q&A. No OpenAI API key required.
+- You can swap out the model by changing the model name in `app/llm.py`.
 
 ---
 
-**Feel free to fork or reuse for other AI, scraping, or agentic workflow demos!**
+## Deployment
+
+- Ready for cloud/container deployment.
+- Easily extendable: add new endpoints, change cache TTL, use a remote DB, swap LLMs, etc.
+
+---
+
+## Credits
+
+By [Salma OUARDI](https://github.com/SalmaOuardi) — Inspired by real-world product challenges & a love for weather apps ☁️
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
