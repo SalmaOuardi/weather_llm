@@ -27,7 +27,10 @@ def verify_password(plain_password, hashed_password):
 
 def user_exists(username):
     with SessionLocal() as db:
-        return db.query(User).filter(User.username == username).first() is not None
+        return (
+            db.query(User).filter(User.username == username).first()
+            is not None
+        )
 
 
 def create_user(username, password):
@@ -57,7 +60,9 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
         if username is None:
-            raise HTTPException(status_code=401, detail="nope, bad credentials")
+            raise HTTPException(
+                status_code=401, detail="nope, bad credentials"
+            )
         return username
     except JWTError:
         raise HTTPException(status_code=401, detail="token's sus")

@@ -13,7 +13,11 @@ from app.auth import (
     user_exists,
     create_user,
 )
-from app.scraper import get_city_place_id, fetch_html_page, parse_weather_from_html
+from app.scraper import (
+    get_city_place_id,
+    fetch_html_page,
+    parse_weather_from_html,
+)
 from app.utils import normalize_city, get_cached_weather, set_cached_weather
 from app.llm import ollama_generate
 
@@ -69,7 +73,10 @@ def add_favorites_endpoint(
     fav: FavoritesIn, current_user: str = Depends(get_current_user)
 ):
     add_favorites(current_user, fav.cities)
-    return {"msg": "favorites updated", "favorites": get_user_favorites(current_user)}
+    return {
+        "msg": "favorites updated",
+        "favorites": get_user_favorites(current_user),
+    }
 
 
 @app.delete("/favorites")
@@ -144,7 +151,9 @@ def get_weather_summary(current_user: str = Depends(get_current_user)):
                 html = fetch_html_page(place_id)
                 weather = parse_weather_from_html(html, matched_city)
                 set_cached_weather(
-                    matched_city, weather["temperature"], weather["weather_condition"]
+                    matched_city,
+                    weather["temperature"],
+                    weather["weather_condition"],
                 )
                 weather_data.append(weather)
             else:
@@ -172,7 +181,10 @@ def ask_weather_question(
 ):
     favs = get_user_favorites(current_user)
     if not favs:
-        return {"answer": "no favorite cities to search.", "matchingCities": []}
+        return {
+            "answer": "no favorite cities to search.",
+            "matchingCities": [],
+        }
     weather_data = []
     for city in favs:
         place_id, matched_city = get_city_place_id(city)
@@ -182,7 +194,9 @@ def ask_weather_question(
                 html = fetch_html_page(place_id)
                 weather = parse_weather_from_html(html, matched_city)
                 set_cached_weather(
-                    matched_city, weather["temperature"], weather["weather_condition"]
+                    matched_city,
+                    weather["temperature"],
+                    weather["weather_condition"],
                 )
                 weather_data.append(weather)
             else:

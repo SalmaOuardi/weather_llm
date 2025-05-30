@@ -13,7 +13,11 @@ def get_city_place_id(user_input):
     payload = [
         {
             "name": "getSunV3LocationSearchUrlConfig",
-            "params": {"language": "en-US", "locationType": "locale", "query": city},
+            "params": {
+                "language": "en-US",
+                "locationType": "locale",
+                "query": city,
+            },
         }
     ]
     headers = {
@@ -27,7 +31,9 @@ def get_city_place_id(user_input):
     }
 
     try:
-        resp = requests.post(api_url, json=payload, headers=headers, timeout=10)
+        resp = requests.post(
+            api_url, json=payload, headers=headers, timeout=10
+        )
         resp.raise_for_status()
         data = resp.json()
         config = data["dal"]["getSunV3LocationSearchUrlConfig"]
@@ -38,7 +44,9 @@ def get_city_place_id(user_input):
         # 1. Try exact city name + country code match
         if country_code:
             for city_name, cc, place_id in zip(
-                locations["city"], locations["countryCode"], locations["placeId"]
+                locations["city"],
+                locations["countryCode"],
+                locations["placeId"],
             ):
                 if (
                     city_name
@@ -49,13 +57,17 @@ def get_city_place_id(user_input):
 
             # 2. Fallback: first city in correct country
             for city_name, cc, place_id in zip(
-                locations["city"], locations["countryCode"], locations["placeId"]
+                locations["city"],
+                locations["countryCode"],
+                locations["placeId"],
             ):
                 if cc == country_code and city_name:
                     return place_id, city_name
 
         # 3. No country code: fallback to first city match in API response
-        for city_name, place_id in zip(locations["city"], locations["placeId"]):
+        for city_name, place_id in zip(
+            locations["city"], locations["placeId"]
+        ):
             if city_name and city_name.strip().lower() == user_city:
                 return place_id, city_name
 
@@ -63,7 +75,9 @@ def get_city_place_id(user_input):
         if locations["placeId"]:
             return locations["placeId"][0], locations["city"][0]
 
-        print(f"No matching city found for '{city}' with country '{country_code}'.")
+        print(
+            f"No matching city found for '{city}' with country '{country_code}'."
+        )
         return None, None
 
     except requests.RequestException as e:
@@ -104,7 +118,9 @@ def parse_weather_from_html(html_text, city):
     if temp_span:
         temp_text = temp_span.get_text(strip=True)
         temp_digits = "".join(filter(str.isdigit, temp_text))
-        temperature = round((int(temp_digits) - 32) * 5 / 9) if temp_digits else None
+        temperature = (
+            round((int(temp_digits) - 32) * 5 / 9) if temp_digits else None
+        )
     else:
         temperature = None
 

@@ -61,13 +61,17 @@ def normalize_city(city):
 
 def get_user_favorites(username):
     with SessionLocal() as db:
-        results = db.query(Favorite).filter(Favorite.username == username).all()
+        results = (
+            db.query(Favorite).filter(Favorite.username == username).all()
+        )
         return [fav.city for fav in results]
 
 
 def add_favorites(username, cities):
     with SessionLocal() as db:
-        existing = set([normalize_city(c) for c in get_user_favorites(username)])
+        existing = set(
+            [normalize_city(c) for c in get_user_favorites(username)]
+        )
         for city in cities:
             norm_city = normalize_city(city)
             if norm_city not in existing:

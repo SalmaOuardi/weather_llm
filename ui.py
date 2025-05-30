@@ -2,7 +2,9 @@ import streamlit as st
 import requests
 
 API_URL = "http://localhost:8000"
-st.set_page_config(page_title="Guided Weather", page_icon="🌤️", layout="centered")
+st.set_page_config(
+    page_title="Guided Weather", page_icon="🌤️", layout="centered"
+)
 
 
 def small_text(s, color="#888"):
@@ -31,7 +33,8 @@ if st.session_state.token is None:
         if st.button("log in", use_container_width=True):
             with st.spinner("authenticating..."):
                 resp = requests.post(
-                    f"{API_URL}/login", data={"username": user, "password": pwd}
+                    f"{API_URL}/login",
+                    data={"username": user, "password": pwd},
                 )
             if resp.ok:
                 st.session_state.token = resp.json()["access_token"]
@@ -42,7 +45,9 @@ if st.session_state.token is None:
 
     with tab_signup:
         new_user = st.text_input("choose a username", key="new_user")
-        new_pwd = st.text_input("choose a password", type="password", key="new_pwd")
+        new_pwd = st.text_input(
+            "choose a password", type="password", key="new_pwd"
+        )
         if st.button("create account", use_container_width=True):
             with st.spinner("signing up..."):
                 resp = requests.post(
@@ -73,7 +78,9 @@ else:
         if get_btn and city_query:
             with st.spinner("fetching weather..."):
                 r = requests.get(
-                    f"{API_URL}/weather", params={"city": city_query}, headers=headers
+                    f"{API_URL}/weather",
+                    params={"city": city_query},
+                    headers=headers,
                 )
             if r.ok:
                 data = r.json()
@@ -114,7 +121,9 @@ else:
         )
         if st.button("add", use_container_width=True):
             r = requests.post(
-                f"{API_URL}/favorites", headers=headers, json={"cities": [add_city]}
+                f"{API_URL}/favorites",
+                headers=headers,
+                json={"cities": [add_city]},
             )
             if r.ok:
                 st.success("added!")
@@ -152,7 +161,8 @@ else:
             if resp.ok:
                 ans = resp.json()
                 st.markdown(
-                    f"<b>LLM:</b> {ans.get('answer', '')}", unsafe_allow_html=True
+                    f"<b>LLM:</b> {ans.get('answer', '')}",
+                    unsafe_allow_html=True,
                 )
                 if ans.get("matchingCities"):
                     st.markdown(
