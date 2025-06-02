@@ -1,6 +1,10 @@
 
 # Guided Weather ☀️
 
+<p align="center">
+  <img src="demo.png" alt="Demo of Guided Weather" width="700"/>
+</p>
+
 A minimalist weather dashboard and favorites tracker with **live scraping, weather caching, authentication, and LLM-powered summaries** — built with FastAPI, Streamlit, SQLite, and Ollama.
 
 ---

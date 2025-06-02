@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, Body
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import HTMLResponse
 from datetime import timedelta
 from pydantic import BaseModel
 from typing import List
@@ -23,6 +24,22 @@ from app.llm import ollama_generate
 
 
 app = FastAPI()
+
+
+@app.get("/", response_class=HTMLResponse)
+def root():
+    return """
+    <html>
+        <head>
+            <title>Guided Weather</title>
+        </head>
+        <body>
+            <h1>Welcome to Guided Weather API!</h1>
+            <p>Visit <a href="/docs">/docs</a> for the interactive API documentation.</p>
+        </body>
+    </html>
+    """
+
 
 # ===== AUTH ENDPOINTS =====
 
@@ -228,7 +245,7 @@ Question:
 Remember: ONLY use the weather data provided above. Do NOT mention cities that are not in the list. 
 """
     raw_response = ollama_generate(prompt)
-    # Try parsing the output as JSON (sometimes LLMs don't output perfect JSON)
+    # try parsing the output as JSON
     try:
         # Sometimes the model may output text before the JSON; try to extract the JSON part
         json_start = raw_response.find("{")

@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
+import os
 
-API_URL = "http://localhost:8000"
+API_URL = os.environ.get("API_URL", "http://localhost:8000")
 st.set_page_config(page_title="Guided Weather", page_icon="🌤️", layout="centered")
 
 

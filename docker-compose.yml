@@ -3,12 +3,12 @@ services:
   backend:
     build:
       context: .
-      dockerfile: app/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./weather.db:/app/weather.db   # persist your sqlite db
-    # environment: (add if you have env vars)
+      - ./weather.db:/app/weather.db   
+    
 
   frontend:
     build:
@@ -18,9 +18,12 @@ services:
       - "8501:8501"
     depends_on:
       - backend
+    environment:
+      - API_URL=http://backend:8000
 
-  # Optional: Ollama (if you want to run the model in Docker)
-  # ollama:
-  #   image: ollama/ollama:latest
-  #   ports:
-  #     - "11434:11434"
+
+
+  ollama:
+     image: ollama/ollama:latest
+     ports:
+       - "11434:11434"
